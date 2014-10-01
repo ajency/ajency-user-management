@@ -13,7 +13,8 @@
  * @wordpress-plugin
  * Plugin Name: Ajency User Management
  * Plugin URI:  http://ajency.in
- * Description: Everything from registration, forgot password, user activation, role and capabilities, user level backups, restores etc...
+ * Description: Everything from registration, forgot password, user activation, role and
+ * 				capabilities, user level backups, restores etc...
  * Version:     0.1.0
  * Author:      Team Ajency
  * Author URI:  http://ajency.in
