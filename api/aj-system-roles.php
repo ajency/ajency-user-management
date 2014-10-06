@@ -52,18 +52,60 @@ class AjSystemRoles{
 	 * @apiError {Int} code Response code
 	 * @apiError {String} message(optional) Error message
 	 */
-	public function get_roles(){
-		return array('administrator','editor','subscriber');
-	}
+	public function get_roles(){}
 
-	public function new_role(){
+	/**
+	 * @api {post} /roles Create new role
+	 * @apiName New Role
+	 * @apiGroup Roles
+	 * @apiVersion 0.1.0
+	 *
+	 * @apiSuccess {Int} code Response code
+	 * @apiSuccess {String} role New Role
+	 *
+	 * @apiError {Int} code Response code
+	 * @apiError {String} message(optional) Error message
+	 */
+	public function new_role(){}
 
-	}
+	/**
+	 * @api {post} /role/:role-slug Return role
+	 * @apiName Get Role
+	 * @apiGroup Roles
+	 * @apiVersion 0.1.0
+	 *
+	 * @apiSuccess {Int} code Response code
+	 * @apiSuccess {Object} role Role object
+	 *
+	 * @apiError {Int} code Response code
+	 * @apiError {String} message(optional) Error message
+	 */
+	public function get_role(){}
 
-	public function get_role(){
-
-	}
-
+	/**
+	 * @api {put} /role/:role-slug update role
+	 * @apiName Update Role
+	 * @apiGroup Roles
+	 * @apiVersion 0.1.0
+	 *
+	 * @apiSuccess {Int} code Response code
+	 * @apiSuccess {Object} role Updated Role object
+	 *
+	 * @apiError {Int} code Response code
+	 * @apiError {String} message(optional) Error message
+	 */
 	public function edit_role(){}
+
+	/**
+	 * @api {delete} /role/:role-slug Delete role
+	 * @apiName Remove Role
+	 * @apiGroup Roles
+	 * @apiVersion 0.1.0
+	 *
+	 * @apiSuccess {Int} code Response code
+	 *
+	 * @apiError {Int} code Response code
+	 * @apiError {String} message(optional) Error message
+	 */
 	public function delete_role(){}
 }
