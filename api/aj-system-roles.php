@@ -71,7 +71,20 @@ class AjSystemRoles{
 	 * @apiError {Int} code Response code
 	 * @apiError {String} message(optional) Error message
 	 */
-	public function new_role(){}
+	public function new_role($role_name, $display_name, $capabilities){
+		$role_creator = new RoleCreator();
+		$response = $role_creator->create_role($role_name,  $display_name, $capabilities);
+
+		if(is_wp_error($response )){
+			return $response;
+		}
+
+		$response = json_ensure_response($response);
+		$response->set_status( 201 );
+		$response->header( 'Location', json_url( '/roles/') );
+
+		return $response;
+	}
 
 	/**
 	 * @api {post} /role/:role-slug Return role

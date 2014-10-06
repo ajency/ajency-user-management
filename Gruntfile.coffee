@@ -16,7 +16,7 @@ module.exports = (grunt) ->
 		# Watches files for changes and runs tasks based on the changed files
 		watch :
 			php :
-				files : [ "*.php", "includes/**/*.php", "tests/**/*.php"]
+				files : [ "*.php", "**/*.php", "tests/**/*.php"]
 				tasks : ["shell:phpunit"]
 
 		shell :

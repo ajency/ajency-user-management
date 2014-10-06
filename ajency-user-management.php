@@ -30,6 +30,10 @@ if (!defined("WPINC")) {
 }
 
 //include all files
+
+//include classes
+require_once(plugin_dir_path(__FILE__) . "classes/rolecreator.class.php");
+
 //API files
 require_once(plugin_dir_path(__FILE__) . "api/aj-system-roles.php");
 require_once(plugin_dir_path(__FILE__) . "api/apis.php");
