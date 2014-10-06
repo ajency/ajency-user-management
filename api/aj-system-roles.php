@@ -36,7 +36,7 @@ class AjSystemRoles{
 				array( array( $this, 'get_roles' ),        WP_JSON_Server::READABLE ),
 				array( array( $this, 'new_role' ),         WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON ),
 			),
-			'/roles/(?P<id>\d+)' => array(
+			'/roles/(?P<role_slug>\d+)' => array(
 				array( array( $this, 'get_role' ),         WP_JSON_Server::READABLE ),
 				array( array( $this, 'edit_role' ),        WP_JSON_Server::EDITABLE | WP_JSON_Server::ACCEPT_JSON ),
 				array( array( $this, 'delete_role' ),      WP_JSON_Server::DELETABLE ),

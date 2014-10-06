@@ -72,11 +72,11 @@ class RolesAPITest extends WP_UnitTestCase{
 	}
 
 	public function test_get_roles(){
-
+		remove_role('new_role');
 		$response = $this->endpoint->get_roles();
 		$response = json_ensure_response( $response );
 		$data = $response->get_data();
-		$this->assertEquals(6, count($data['roles']) );
+		$this->assertEquals(5, count($data['roles']) );
 	}
 
 }
