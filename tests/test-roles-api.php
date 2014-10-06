@@ -70,4 +70,13 @@ class RolesAPITest extends WP_UnitTestCase{
 		$this->assertEquals( 'no_display_name', $response->get_error_code() );
 		$this->assertEquals( 'Display name not passed', $response->get_error_message() );
 	}
+
+	public function test_get_roles(){
+
+		$response = $this->endpoint->get_roles();
+		$response = json_ensure_response( $response );
+		$data = $response->get_data();
+		$this->assertEquals(6, count($data['roles']) );
+	}
+
 }

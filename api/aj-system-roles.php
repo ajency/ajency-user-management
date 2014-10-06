@@ -57,7 +57,11 @@ class AjSystemRoles{
 	 * @apiError {Int} code Response code
 	 * @apiError {String} message(optional) Error message
 	 */
-	public function get_roles(){}
+	public function get_roles(){
+		global $wp_roles;
+		$response = json_ensure_response(array('roles' => $wp_roles->roles));
+		return $response;
+	}
 
 	/**
 	 * @api {post} /roles Create new role
