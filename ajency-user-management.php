@@ -29,6 +29,11 @@ if (!defined("WPINC")) {
 	die;
 }
 
+//include all files
+//API files
+require_once(plugin_dir_path(__FILE__) . "api/aj-system-roles.php");
+require_once(plugin_dir_path(__FILE__) . "api/apis.php");
+
 require_once(plugin_dir_path(__FILE__) . "AjencyUserManagement.php");
 
 // Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
