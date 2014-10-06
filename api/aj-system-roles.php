@@ -40,6 +40,18 @@ class AjSystemRoles{
 		return array_merge( $routes, $role_routes );
 	}
 
+	/**
+	 * @api {get} /roles Request system roles
+	 * @apiName GetRoles
+	 * @apiGroup Roles
+	 * @apiVersion 0.1.0
+	 *
+	 * @apiSuccess {Int} code Response code
+	 * @apiSuccess {Array} roles  All system roles
+	 *
+	 * @apiError {Int} code Response code
+	 * @apiError {String} message(optional) Error message
+	 */
 	public function get_roles(){
 		return array('administrator','editor','subscriber');
 	}
