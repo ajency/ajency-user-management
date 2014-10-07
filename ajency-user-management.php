@@ -33,6 +33,7 @@ if (!defined("WPINC")) {
 
 //include classes
 require_once(plugin_dir_path(__FILE__) . "classes/rolecreator.class.php");
+require_once(plugin_dir_path(__FILE__) . "classes/roleupdater.class.php");
 
 //API files
 require_once(plugin_dir_path(__FILE__) . "api/aj-system-roles.php");

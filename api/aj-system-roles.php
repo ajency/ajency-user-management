@@ -60,6 +60,7 @@ class AjSystemRoles{
 	public function get_roles(){
 		global $wp_roles;
 		$response = json_ensure_response(array('roles' => $wp_roles->roles));
+		$response->set_status( 200 );
 		return $response;
 	}
 
@@ -115,7 +116,20 @@ class AjSystemRoles{
 	 * @apiError {Int} code Response code
 	 * @apiError {String} message(optional) Error message
 	 */
-	public function edit_role(){}
+	public function edit_role($role_name, $capabilities){
+
+		$role_updater = new RoleUpdater();
+		$response = $role_updater->update_role($role_name, $capabilities);
+
+		if(is_wp_error($response )){
+			return $response;
+		}
+
+		$response = array('role' => $response);
+		$response = json_ensure_response($response);
+		$response->set_status(200);
+		return $response;
+	}
 
 	/**
 	 * @api {delete} /role/:role-slug Delete role

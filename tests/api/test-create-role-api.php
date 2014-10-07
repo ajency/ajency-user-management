@@ -74,7 +74,16 @@ class RolesAPITest extends WP_UnitTestCase{
 		$response = $this->endpoint->get_roles();
 		$response = json_ensure_response( $response );
 		$data = $response->get_data();
+		$this->assertEquals(200, $response->get_status() );
 		$this->assertEquals(7, count($data['roles']) );
+	}
+
+	public function test_edit_role_api(){
+		$response = $this->endpoint->edit_role('editor', array('cap_name' => true) );
+		$response = json_ensure_response( $response );
+		$data = $response->get_data();
+		$this->assertEquals(200, $response->get_status() );
+		$this->assertInstanceOf('WP_Role', $data['role'] );
 	}
 
 }
