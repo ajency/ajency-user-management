@@ -6,12 +6,14 @@ class RolesAPITest extends WP_UnitTestCase{
 		parent::setUp();
 		$this->author_id = $this->factory->user->create( array( 'role' => 'editor' ) );
 		wp_set_current_user( $this->author_id );
-
-		$this->post_id = $this->factory->post->create();
-		$this->post_obj = get_post( $this->post_id );
-
 		$this->fake_server = $this->getMock( 'WP_JSON_Server', null );
 		$this->endpoint = new AjSystemRoles( $this->fake_server );
+	}
+
+	public static function tearDownAfterClass(){
+		parent::tearDownAfterClass();
+		remove_role('new_role');
+		remove_role('new_test_role');
 	}
 
 	protected function check_create_new_role_response($response){
@@ -71,12 +73,19 @@ class RolesAPITest extends WP_UnitTestCase{
 		$this->assertEquals( 'Display name not passed', $response->get_error_message() );
 	}
 
+	public function test_new_role_api_with_role_to_inherit(){
+
+		$response = $this->endpoint->new_role( 'new_test_role', 'display name', array('edit_plugin' => true), 'administrator');
+		$response = json_ensure_response( $response );
+		$response_data = $response->get_data();
+		$this->assertEquals( 'new_test_role', $response_data->name );
+	}
+
 	public function test_get_roles(){
-		remove_role('new_role');
 		$response = $this->endpoint->get_roles();
 		$response = json_ensure_response( $response );
 		$data = $response->get_data();
-		$this->assertEquals(5, count($data['roles']) );
+		$this->assertEquals(7, count($data['roles']) );
 	}
 
 }

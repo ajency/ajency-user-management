@@ -75,9 +75,9 @@ class AjSystemRoles{
 	 * @apiError {Int} code Response code
 	 * @apiError {String} message(optional) Error message
 	 */
-	public function new_role($role_name, $display_name, $capabilities){
+	public function new_role($role_name, $display_name, $capabilities, $inherit_from = false){
 		$role_creator = new RoleCreator();
-		$response = $role_creator->create_role($role_name,  $display_name, $capabilities);
+		$response = $role_creator->create_role($role_name,  $display_name, $capabilities, $inherit_from);
 
 		if(is_wp_error($response )){
 			return $response;
