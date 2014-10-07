@@ -8,6 +8,10 @@ class RoleCreator {
 
 	public function create_role($role, $display_name, $capabilities, $inherit_from = false){
 
+		if(!current_user_can('activate_plugins' ) && !current_user_can('edit_roles')){
+			return new WP_Error('not_enough_permission', __('You do not have enough permission to perform this action'));
+		}
+
 		if(!is_array($capabilities) or empty($capabilities))
 			return new WP_Error('no_capabilities',__('No capabilities passed'));
 
@@ -31,7 +35,7 @@ class RoleCreator {
 
 		$capabilities = array();
 
-		if($role !== null)
+		if($role instanceof WP_Role)
 			$capabilities = $role->capabilities;
 
 		return $capabilities;

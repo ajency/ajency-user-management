@@ -4,7 +4,7 @@ class RolesAPITest extends WP_UnitTestCase{
 
 	public function setUp(){
 		parent::setUp();
-		$this->author_id = $this->factory->user->create( array( 'role' => 'editor' ) );
+		$this->author_id = $this->factory->user->create( array( 'role' => 'administrator' ) );
 		wp_set_current_user( $this->author_id );
 		$this->fake_server = $this->getMock( 'WP_JSON_Server', null );
 		$this->endpoint = new AjSystemRoles( $this->fake_server );
@@ -12,6 +12,7 @@ class RolesAPITest extends WP_UnitTestCase{
 
 	public static function tearDownAfterClass(){
 		parent::tearDownAfterClass();
+		wp_set_current_user( 99999 );
 		remove_role('new_role');
 		remove_role('new_test_role');
 	}
@@ -26,7 +27,7 @@ class RolesAPITest extends WP_UnitTestCase{
 
 		$response_data = $response->get_data();
 		$this->assertEquals( 'new_role', $response_data->name );
-		$this->assertTrue( $response_data->has_cap('edit_plugin') );
+
 	}
 
 	public function test_new_role_api(){
@@ -75,7 +76,7 @@ class RolesAPITest extends WP_UnitTestCase{
 
 	public function test_new_role_api_with_role_to_inherit(){
 
-		$response = $this->endpoint->new_role( 'new_test_role', 'display name', array('edit_plugin' => true), 'administrator');
+		$response = $this->endpoint->new_role( 'new_test_role', 'display name', array('edit_plugin' => true), 'editor');
 		$response = json_ensure_response( $response );
 		$response_data = $response->get_data();
 		$this->assertEquals( 'new_test_role', $response_data->name );
