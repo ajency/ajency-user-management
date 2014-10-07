@@ -17,39 +17,28 @@ class RolesAPITest extends WP_UnitTestCase{
 		remove_role('new_test_role');
 	}
 
-	protected function check_create_new_role_response($response){
+	protected function check_create_new_role_response($role, $response){
 		$this->assertNotInstanceOf( 'WP_Error', $response );
 
 		$response = json_ensure_response( $response );
 		$headers = $response->get_headers();
 		$this->assertEquals( 201, $response->get_status() );
-		$this->assertArrayHasKey( 'Location', $headers );
 
 		$response_data = $response->get_data();
-		$this->assertEquals( 'new_role', $response_data->name );
+		$this->assertEquals( $role, $response_data->name );
 
 	}
 
 	public function test_new_role_api(){
 
-		$response = $this->endpoint->new_role( 'new_role', 'New Role',
-											array(
-													'edit_plugin' => true
-											)
-										);
+		$response = $this->endpoint->new_role( 'new_role', 'New Role',array('edit_plugin' => true));
 		$response = json_ensure_response( $response );
-		$this->check_create_new_role_response( $response );
+		$this->check_create_new_role_response('new_role', $response );
 	}
-
-
 
 	public function test_new_role_api_existing_role(){
 
-		$response = $this->endpoint->new_role( 'administrator', 'Administrator',
-											array(
-													'edit_plugin' => true
-											)
-										);
+		$response = $this->endpoint->new_role( 'administrator', 'Administrator', array('edit_plugin' => true));
 		$response = json_ensure_response( $response );
 		$this->assertInstanceOf( 'WP_Error', $response );
 		$this->assertEquals( 'role_exists', $response->get_error_code() );
@@ -76,10 +65,9 @@ class RolesAPITest extends WP_UnitTestCase{
 
 	public function test_new_role_api_with_role_to_inherit(){
 
-		$response = $this->endpoint->new_role( 'new_test_role', 'display name', array('edit_plugin' => true), 'editor');
+		$response = $this->endpoint->new_role( 'new_r', 'display name', array('edit_plugin' => true), 'editor');
 		$response = json_ensure_response( $response );
-		$response_data = $response->get_data();
-		$this->assertEquals( 'new_test_role', $response_data->name );
+		$this->check_create_new_role_response('new_r', $response );
 	}
 
 	public function test_get_roles(){
