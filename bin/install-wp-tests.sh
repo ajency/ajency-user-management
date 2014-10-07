@@ -31,6 +31,15 @@ install_wp() {
 	wget -nv -O $WP_CORE_DIR/wp-content/db.php https://raw.github.com/markoheijnen/wp-mysqli/master/db.php
 }
 
+install_helper_plugin() {
+
+	local PLUGIN_VERSION='json-rest-api.1.1.1'
+
+	wget -nv -O $WP_CORE_DIR/wp-content/plugins/json-rest-api.zip https://downloads.wordpress.org/plugin/${PLUGIN_VERSION}.zip
+
+	unzip $WP_CORE_DIR/wp-content/plugins/json-rest-api.zip -d $WP_CORE_DIR/wp-content/plugins
+}
+
 install_test_suite() {
 	# portable in-place argument for both GNU sed and Mac OSX sed
 	if [[ $(uname -s) == 'Darwin' ]]; then
@@ -74,5 +83,6 @@ install_db() {
 }
 
 install_wp
+install_helper_plugin
 install_test_suite
 install_db
