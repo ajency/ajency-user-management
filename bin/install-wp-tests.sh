@@ -32,9 +32,12 @@ install_wp() {
 }
 
 install_helper_plugin() {
-	local PLUGIN_VERSION = 'json-rest-api.1.1.1'
+
+	local PLUGIN_VERSION='json-rest-api.1.1.1'
+
 	wget -nv -O $WP_CORE_DIR/wp-content/plugins/json-rest-api.zip https://downloads.wordpress.org/plugin/${PLUGIN_VERSION}.zip
-	unzip $WP_CORE_DIR/wp-content/plugins/json-rest-api.zip
+
+	unzip $WP_CORE_DIR/wp-content/plugins/json-rest-api.zip -d $WP_CORE_DIR/wp-content/plugins
 }
 
 install_test_suite() {
