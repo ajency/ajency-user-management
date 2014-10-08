@@ -12,6 +12,7 @@ class RolesUpdaterTest extends WP_UnitTestCase{
 	public static function tearDownAfterClass(){
 		parent::tearDownAfterClass();
 		wp_set_current_user( 99999 );
+		remove_role('dummyrole');
 	}
 
 	public function test_update_role_without_permission(){

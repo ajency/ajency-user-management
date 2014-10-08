@@ -16,6 +16,7 @@ class RolesCreatorTest extends WP_UnitTestCase{
 		remove_role('new_clone_role');
 		remove_role('new_test_role');
 		remove_role('new_dummy_role');
+		remove_role('new_extra_cap_role');
 	}
 
 	public function test_create_role(){

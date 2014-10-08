@@ -81,7 +81,7 @@ class AjSystemRoles{
 		$response = $role_creator->create_role($role_name,  $display_name, $capabilities, $inherit_from);
 
 		if(is_wp_error($response )){
-			return $response;
+			return json_ensure_error_response($response);
 		}
 
 		$response = json_ensure_response($response);
@@ -142,5 +142,16 @@ class AjSystemRoles{
 	 * @apiError {Int} code Response code
 	 * @apiError {String} message(optional) Error message
 	 */
-	public function delete_role(){}
+	public function delete_role($role_name){
+		$role_deletor = new RoleDeletor();
+		$response = $role_deletor->delete_role($role_name);
+
+		if(is_wp_error($response )){
+			return $response;
+		}
+
+		$response = json_ensure_response($response);
+		$response->set_status(200);
+		return $response;
+	}
 }

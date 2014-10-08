@@ -15,6 +15,7 @@ class RolesAPITest extends WP_UnitTestCase{
 		wp_set_current_user( 99999 );
 		remove_role('new_role');
 		remove_role('new_test_role');
+		remove_role('new_r');
 	}
 
 	protected function check_create_new_role_response($role, $response){
@@ -39,28 +40,33 @@ class RolesAPITest extends WP_UnitTestCase{
 	public function test_new_role_api_existing_role(){
 
 		$response = $this->endpoint->new_role( 'administrator', 'Administrator', array('edit_plugin' => true));
-		$response = json_ensure_response( $response );
-		$this->assertInstanceOf( 'WP_Error', $response );
-		$this->assertEquals( 'role_exists', $response->get_error_code() );
-		$this->assertEquals( 'Role already exists', $response->get_error_message() );
+		$response = json_ensure_error_response( $response );
+		$this->assertInstanceOf( 'WP_JSON_Error_Response', $response );
+		$data = $response->get_data();
+		$this->assertEquals( 'role_exists', $data['code']);
+		$this->assertEquals( 'Role already exists', $data['error'] );
+		$this->assertEquals(422, $response->get_status() );
 	}
 
 	public function test_new_role_api_without_caps(){
 
 		$response = $this->endpoint->new_role( 'new_role', 'New Role', array());
-		$response = json_ensure_response( $response );
-		$this->assertInstanceOf( 'WP_Error', $response );
-		$this->assertEquals( 'no_capabilities', $response->get_error_code() );
-		$this->assertEquals( 'No capabilities passed', $response->get_error_message() );
+		$response = json_ensure_error_response( $response );
+		$data = $response->get_data();
+		$this->assertInstanceOf( 'WP_JSON_Error_Response', $response );
+		$this->assertEquals( 'no_capabilities', $data['code'] );
+		$this->assertEquals( 'No capabilities passed', $data['error'] );
+		$this->assertEquals(422, $response->get_status() );
 	}
 
 	public function test_new_role_api_without_display_name(){
 
 		$response = $this->endpoint->new_role( 'new_role', '', array('edit_plugin' => true));
-		$response = json_ensure_response( $response );
-		$this->assertInstanceOf( 'WP_Error', $response );
-		$this->assertEquals( 'no_display_name', $response->get_error_code() );
-		$this->assertEquals( 'Display name not passed', $response->get_error_message() );
+		$response = json_ensure_error_response( $response );
+		$data = $response->get_data();
+		$this->assertInstanceOf( 'WP_JSON_Error_Response', $response );
+		$this->assertEquals( 'no_display_name', $data['code'] );
+		$this->assertEquals( 'Display name not passed', $data['error']);
 	}
 
 	public function test_new_role_api_with_role_to_inherit(){
@@ -84,6 +90,13 @@ class RolesAPITest extends WP_UnitTestCase{
 		$data = $response->get_data();
 		$this->assertEquals(200, $response->get_status() );
 		$this->assertInstanceOf('WP_Role', $data['role'] );
+	}
+
+	public function test_delete_role_api(){
+		$response = $this->endpoint->delete_role('editor');
+		$response = json_ensure_response( $response );
+		$data = $response->get_data();
+		$this->assertEquals(200, $response->get_status() );
 	}
 
 }

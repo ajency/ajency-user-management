@@ -30,10 +30,13 @@ if (!defined("WPINC")) {
 }
 
 //include all files
+require_once(plugin_dir_path(__FILE__) . "classes/lib/wp-json-error-response.class.php");
 
 //include classes
+require_once(plugin_dir_path(__FILE__) . "classes/roles.php");
 require_once(plugin_dir_path(__FILE__) . "classes/rolecreator.class.php");
 require_once(plugin_dir_path(__FILE__) . "classes/roleupdater.class.php");
+require_once(plugin_dir_path(__FILE__) . "classes/roledeletor.class.php");
 
 //API files
 require_once(plugin_dir_path(__FILE__) . "api/aj-system-roles.php");
