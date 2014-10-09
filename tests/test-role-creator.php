@@ -25,6 +25,14 @@ class RolesCreatorTest extends WP_UnitTestCase{
 		$this->assertInstanceOf('WP_Role',get_role('new_role'));
 	}
 
+	public function test_create_role_with_invalid_name(){
+		$args = array('invalid role', 'role display name', array('edit_files' => true));
+		$return = call_user_func_array(array($this->creator, 'create_role'), $args);
+		$this->assertInstanceOf('WP_Error', $return);
+		$this->assertEquals( 'invalid_name', $return->get_error_code() );
+		$this->assertEquals( 'Invalid role name. Use only small case letters and underscore', $return->get_error_message() );
+	}
+
 	public function test_create_role_with_role_to_inherit(){
 		$args = array('new_clone_role', 'clone role display name', array('edit_files' => true), 'administrator');
 		call_user_func_array(array($this->creator, 'create_role'), $args);
