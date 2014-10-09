@@ -18,5 +18,9 @@
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
 	<!-- TODO: Provide markup for your options page here. -->
+	<button class="btn btn-primary add-role">Add Role</button>
+	<button class="btn btn-primary all-roles">All Roles</button>
+	<button class="btn btn-primary edit-role">Edit Role</button>
+	<button class="btn btn-primary delete-role">Delete Role</button>
 
 </div>

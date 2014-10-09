@@ -36,7 +36,7 @@ class AjSystemRoles{
 				array( array( $this, 'get_roles' ),        WP_JSON_Server::READABLE ),
 				array( array( $this, 'new_role' ),         WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON ),
 			),
-			'/roles/(?P<role_slug>\d+)' => array(
+			'/roles/(?P<role_name>.+)' => array(
 				array( array( $this, 'get_role' ),         WP_JSON_Server::READABLE ),
 				array( array( $this, 'edit_role' ),        WP_JSON_Server::EDITABLE | WP_JSON_Server::ACCEPT_JSON ),
 				array( array( $this, 'delete_role' ),      WP_JSON_Server::DELETABLE ),
@@ -117,7 +117,7 @@ class AjSystemRoles{
 	 * @apiError {String} message(optional) Error message
 	 */
 	public function edit_role($role_name, $capabilities){
-
+		return array($role_name, $capabilities);
 		$role_updater = new RoleUpdater();
 		$response = $role_updater->update_role($role_name, $capabilities);
 

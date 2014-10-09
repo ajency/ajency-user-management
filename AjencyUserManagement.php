@@ -175,6 +175,8 @@ class AjencyUserManagement{
 				array("jquery"), $this->version);
 		}
 
+		wp_localize_script( $this->plugin_slug . "-admin-script", 'WP_API_Settings', array( 'root' => esc_url_raw( get_json_url() ), 'nonce' => wp_create_nonce( 'wp_json' ) ) );
+
 	}
 
 	/**
