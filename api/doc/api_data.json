@@ -46,7 +46,7 @@
         ]
       }
     },
-    "filename": "api/aj-system-roles.php"
+    "filename": "./aj-system-roles.php"
   },
   {
     "type": "post",
@@ -95,7 +95,7 @@
         ]
       }
     },
-    "filename": "api/aj-system-roles.php"
+    "filename": "./aj-system-roles.php"
   },
   {
     "type": "post",
@@ -144,7 +144,7 @@
         ]
       }
     },
-    "filename": "api/aj-system-roles.php"
+    "filename": "./aj-system-roles.php"
   },
   {
     "type": "delete",
@@ -186,7 +186,7 @@
         ]
       }
     },
-    "filename": "api/aj-system-roles.php"
+    "filename": "./aj-system-roles.php"
   },
   {
     "type": "put",
@@ -235,6 +235,6 @@
         ]
       }
     },
-    "filename": "api/aj-system-roles.php"
+    "filename": "./aj-system-roles.php"
   }
 ]
